@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savol va Javob Qidirish</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 22px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #007bff;
+        }
+
+        .question {
+            margin: 10px 0;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .answer {
+            color: green;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Savol va Javob Qidirish</h1>
+        <input type="text" id="search" onkeyup="searchQuestion()" placeholder="Savolni kiriting...">
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "WWWning asoschisi kim?", answer: "Tim Berners-Lee" },
+            { question: "Internet protokollaridan biri bo‘lgan HTTPning maqsadi nima?", answer: "Ma'lumot almashish" },
+            { question: "Klient-server modelida klient nima vazifa bajaradi?", answer: "So‘rov yuboradi" },
+            { question: "DNS nima uchun ishlatiladi?", answer: "IP-manzillarni domen nomlariga aylantirish" },
+            { question: "WWW qisqartmasining to‘liq shakli nima?", answer: "World Wide Web" },
+            { question: "HTML hujjati qaysi teg bilan boshlanadi?", answer: "<!DOCTYPE html>" },
+            { question: "HTMLda matnni qalin qilish uchun qaysi teg ishlatiladi?", answer: "<b>" },
+            { question: "CSSda matn rangini belgilash uchun qaysi xususiyat ishlatiladi?", answer: "color" },
+            { question: "JavaScriptda o‘zgaruvchi e‘lon qilish uchun qaysi kalit so‘z ishlatiladi?", answer: "var" },
+            { question: "JavaScriptda massiv uzunligini olish uchun qaysi xususiyat ishlatiladi?", answer: "length" }
+        ];
+
+        function searchQuestion() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = ""; // Oldingi natijalarni tozalash
+
+            if (input.length > 0) {
+                let found = false;
+                questions.forEach(q => {
+                    if (q.question.toLowerCase().includes(input)) {
+                        found = true;
+                        let questionElem = document.createElement("div");
+                        questionElem.classList.add("question");
+                        questionElem.innerText = q.question;
+
+                        let answerElem = document.createElement("div");
+                        answerElem.classList.add("answer");
+                        answerElem.innerText = "Javob: " + q.answer;
+
+                        resultDiv.appendChild(questionElem);
+                        resultDiv.appendChild(answerElem);
+                    }
+                });
+
+                if (!found) {
+                    resultDiv.innerHTML = "<p>Bu savol bo‘yicha javob topilmadi.</p>";
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
